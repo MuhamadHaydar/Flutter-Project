@@ -23,6 +23,11 @@ class _MyAppState extends State<MyApp> {
 
   String _startMeasure;
 
+  final TextStyle inputStyle = TextStyle(fontSize: 20, color: Colors.blue[900]);
+
+  final TextStyle labelStyle =
+      TextStyle(fontSize: 20, color: Colors.green[700]);
+
   @override
   void initState() {
     _numberForm = 0;
