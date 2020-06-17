@@ -9,6 +9,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  // The input number.
   double _numberForm;
 
   // Whole measures.
@@ -74,14 +75,18 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Measures Converter',
       home: Scaffold(
+        resizeToAvoidBottomPadding: false,
         appBar: AppBar(
           title: Text('Measures Converter'),
         ),
         body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: 10),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Spacer(),
+              Spacer(
+                flex: 1,
+              ),
               // Spaces is the widget used to add space.
               Text(
                 'Value',
@@ -162,7 +167,8 @@ class _MyAppState extends State<MyApp> {
                         timeInSecForIosWeb: 1,
                         backgroundColor: Colors.red,
                         textColor: Colors.white,
-                        fontSize: 16.0);
+                        fontSize: 16.0
+                    );
                   } else {
                     convert(_numberForm, _startMeasure, _convertedMeasure);
                   }
@@ -186,6 +192,7 @@ class _MyAppState extends State<MyApp> {
   }
 
 
+  // Method to convert the conversion.
   void convert(double value, String from, String to) {
     int nfrom = _measuresMap[from];
     int nto = _measuresMap[to];
