@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,6 +11,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   double _numberForm;
 
+  // Whole measures.
   final List<String> _measures = [
     'meters',
     'kilometers',
@@ -21,10 +23,13 @@ class _MyAppState extends State<MyApp> {
     'ounces'
   ];
 
+  // The From measure to be converted.
   String _startMeasure;
 
+  // The To measure to be converted.
   String _convertedMeasure;
 
+  // The text stories the result message of conversion.
   String _resultMessage;
 
   // Text style for the user input texts.
@@ -46,6 +51,7 @@ class _MyAppState extends State<MyApp> {
     'ounces': 7
   };
 
+  // The variable saves numbers according the conversion formula.
   dynamic _formulas = {
     '0': [1, 0.001, 0, 0, 3.28084, 0.000621371, 0, 0],
     '1': [1000, 1, 0, 0, 3280.84, 0.621371, 0, 0],
@@ -146,13 +152,27 @@ class _MyAppState extends State<MyApp> {
                   'Convert',
                   style: inputStyle,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  // Check if both conversions selected or not:
+                  if (_startMeasure == null || _convertedMeasure == null) {
+                    Fluttertoast.showToast(
+                        msg: "Select the Measurement",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  } else {
+                    convert(_numberForm, _startMeasure, _convertedMeasure);
+                  }
+                },
               ),
               Spacer(
                 flex: 2,
               ),
               Text(
-                _numberForm.toString(),
+                (_resultMessage == null) ? '' : _resultMessage,
                 style: labelStyle,
               ),
               Spacer(
@@ -169,7 +189,7 @@ class _MyAppState extends State<MyApp> {
   void convert(double value, String from, String to) {
     int nfrom = _measuresMap[from];
     int nto = _measuresMap[to];
-    var multiplier = _formulas[nfrom.toString()][to];
+    var multiplier = _formulas[nfrom.toString()][nto];
     print('This is multiplier from $from to $to $multiplier');
     var result = value * multiplier;
     if (result == 0) {
