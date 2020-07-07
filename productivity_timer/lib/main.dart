@@ -101,7 +101,7 @@ class TimerHomePage extends StatelessWidget {
                         child: ProductivityButton(
                             color: Color(0xff212121),
                             text: 'Stop',
-                            onPressed: emptyMethod)),
+                            onPressed: () => timer.stopTimer())),
                     Padding(
                       padding: EdgeInsets.all(defaultPadding),
                     ),
@@ -109,7 +109,7 @@ class TimerHomePage extends StatelessWidget {
                         child: ProductivityButton(
                       color: Color(0xff009688),
                       text: 'Restart',
-                      onPressed: emptyMethod,
+                      onPressed: () => timer.startTimer(),
                     )),
                     Padding(
                       padding: EdgeInsets.all(defaultPadding),

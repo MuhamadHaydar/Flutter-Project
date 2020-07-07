@@ -46,7 +46,7 @@ class CountDownTimer {
         : t.inMinutes.toString();
     int numSeconds = t.inSeconds - (t.inMinutes * 60);
     String seconds =
-    (numSeconds < 10) ? '0' + numSeconds.toString() : numSeconds.toString();
+        (numSeconds < 10) ? '0' + numSeconds.toString() : numSeconds.toString();
     String formattedTime = minutes + ":" + seconds;
     return formattedTime;
   }
@@ -62,4 +62,15 @@ class CountDownTimer {
     _fullTime = _time;
   }
 
+  // The timer starts.
+  void startTimer() {
+    if (_time.inSeconds > 0) {
+      _isActive = true;
+    }
+  }
+
+  // The timer stops.
+  void stopTimer() {
+    _isActive = false;
+  }
 }
