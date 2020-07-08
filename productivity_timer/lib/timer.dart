@@ -6,6 +6,12 @@ class CountDownTimer {
   // The amount of work time.
   int work = 30;
 
+  // The amount of short Break time.
+  int shortBreak = 5;
+
+  // The amount of long Break time.
+  int longBreak = 20;
+
   // The radius for the percentage of the circular.
   double _radius = 1;
 
@@ -72,5 +78,12 @@ class CountDownTimer {
   // The timer stops.
   void stopTimer() {
     _isActive = false;
+  }
+
+  // The method for the short and long breaks.
+  void startBreak(bool isShort) {
+    _radius = 1;
+    _time = Duration(minutes: (isShort) ? shortBreak : longBreak, seconds: 0);
+    _fullTime = _time;
   }
 }
