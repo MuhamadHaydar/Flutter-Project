@@ -10,9 +10,7 @@ class ProductivityButton extends StatelessWidget {
 
   // Constructor.
   ProductivityButton(
-      {@required this.color,
-      @required this.text,
-      this.onPressed});
+      {@required this.color, @required this.text, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +23,28 @@ class ProductivityButton extends StatelessWidget {
       ),
       color: color,
       onPressed: onPressed,
+    );
+  }
+}
+
+class SettingButton extends StatelessWidget {
+  // Some properties to create the button.
+  final Color color;
+  final String text;
+  final int value;
+
+  // SettingButton constructor.
+  SettingButton(this.color, this.text, this.value);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialButton(
+      child: Text(
+        this.text,
+        style: TextStyle(color: Colors.white),
+      ),
+      onPressed: () => null,
+      color: this.color,
     );
   }
 }
