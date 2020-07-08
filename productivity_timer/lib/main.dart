@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:productivitytimer/settings.dart';
 import 'package:productivitytimer/timermodel.dart';
 import 'package:productivitytimer/widgets.dart';
 
@@ -46,6 +47,11 @@ class TimerHomePage extends StatelessWidget {
             PopupMenuButton(
               itemBuilder: (BuildContext context) {
                 return menuItems.toList();
+              },
+              onSelected: (s) {
+                if (s == 'Settings') {
+                  goToSettings(context);
+                }
               },
             )
           ],
@@ -105,7 +111,10 @@ class TimerHomePage extends StatelessWidget {
                             lineWidth: 10.0,
                             percent: timer.percent,
                             center: Text(timer.time,
-                                style: Theme.of(context).textTheme.headline4),
+                                style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .headline4),
                             progressColor: Color(0xff009688),
                           ));
                     }),
@@ -137,5 +146,15 @@ class TimerHomePage extends StatelessWidget {
             );
           },
         ));
+  }
+
+  // The method used to go Settings Route.
+  void goToSettings(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SettingsScreen(),
+      ),
+    );
   }
 }
