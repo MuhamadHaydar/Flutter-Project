@@ -29,9 +29,26 @@ class TimerHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Add Setting as popUpMenuItem to the list of items.
+    final List<PopupMenuItem<String>> menuItems = List<PopupMenuItem<String>>();
+    menuItems.add(
+      PopupMenuItem(
+        value: 'Settings',
+        child: Text('Settings'),
+      ),
+    );
+
     return Scaffold(
         appBar: AppBar(
           title: Text('My work timer'),
+          actions: [
+            // Add popUp menu Button.
+            PopupMenuButton(
+              itemBuilder: (BuildContext context) {
+                return menuItems.toList();
+              },
+            )
+          ],
         ),
         body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraint) {
@@ -84,13 +101,13 @@ class TimerHomePage extends StatelessWidget {
                           : snapshot.data;
                       return Expanded(
                           child: CircularPercentIndicator(
-                        radius: availableWidth / 2,
-                        lineWidth: 10.0,
-                        percent: timer.percent,
-                        center: Text(timer.time,
-                            style: Theme.of(context).textTheme.headline4),
-                        progressColor: Color(0xff009688),
-                      ));
+                            radius: availableWidth / 2,
+                            lineWidth: 10.0,
+                            percent: timer.percent,
+                            center: Text(timer.time,
+                                style: Theme.of(context).textTheme.headline4),
+                            progressColor: Color(0xff009688),
+                          ));
                     }),
                 Row(
                   children: <Widget>[
@@ -107,10 +124,10 @@ class TimerHomePage extends StatelessWidget {
                     ),
                     Expanded(
                         child: ProductivityButton(
-                      color: Color(0xff009688),
-                      text: 'Restart',
-                      onPressed: () => timer.startTimer(),
-                    )),
+                          color: Color(0xff009688),
+                          text: 'Restart',
+                          onPressed: () => timer.startTimer(),
+                        )),
                     Padding(
                       padding: EdgeInsets.all(defaultPadding),
                     ),
@@ -121,6 +138,4 @@ class TimerHomePage extends StatelessWidget {
           },
         ));
   }
-
-  void emptyMethod() {}
 }
