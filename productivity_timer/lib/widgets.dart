@@ -27,14 +27,23 @@ class ProductivityButton extends StatelessWidget {
   }
 }
 
+/*
+  In Dart, typedef can be used as a pointer that references a function. This is
+  because we want to call the function, with the correct parameters, from the
+  relevant button.
+ */
+typedef CallbackSetting = void Function(String, int);
+
 class SettingButton extends StatelessWidget {
   // Some properties to create the button.
   final Color color;
   final String text;
   final int value;
+  final String setting;
+  final CallbackSetting callback;
 
   // SettingButton constructor.
-  SettingButton(this.color, this.text, this.value);
+  SettingButton(this.color, this.text, this.value, this.setting, this.callback);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +52,7 @@ class SettingButton extends StatelessWidget {
         this.text,
         style: TextStyle(color: Colors.white),
       ),
-      onPressed: () => null,
+      onPressed: () => this.callback(this.setting, this.value),
       color: this.color,
     );
   }

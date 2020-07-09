@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:productivitytimer/timermodel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CountDownTimer {
   // The amount of work time.
@@ -62,7 +63,9 @@ class CountDownTimer {
   contained in the work variable, and the same for the _fullTime
   field.
    */
-  void startWork() {
+  void startWork() async {
+    // First read settings from the settings then start the work.
+    await readSettings();
     _radius = 1;
     _time = Duration(minutes: this.work, seconds: 0);
     _fullTime = _time;
@@ -85,5 +88,20 @@ class CountDownTimer {
     _radius = 1;
     _time = Duration(minutes: (isShort) ? shortBreak : longBreak, seconds: 0);
     _fullTime = _time;
+  }
+
+  /*
+  Create a method that retrieves the settings saved in the SharedPreferences
+  instance or sets default values, as follows:
+   */
+  Future readSettings() async {
+    SharedPreferences prefs = await
+    SharedPreferences.getInstance();
+    work = prefs.getInt('workTime') == null ? 30 :
+    prefs.getInt('workTime');
+    shortBreak = prefs.getInt('shortBreak') == null ? 30 :
+    prefs.getInt('shortBreak');
+    longBreak = prefs.getInt('longBreak') == null ? 30 :
+    prefs.getInt('longBreak');
   }
 }
